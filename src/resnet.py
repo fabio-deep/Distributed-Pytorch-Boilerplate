@@ -39,11 +39,13 @@ from torch.autograd import Variable
 
 __all__ = ['ResNet', 'resnet20', 'resnet32', 'resnet44', 'resnet56', 'resnet110', 'resnet1202']
 
+
 def _weights_init(m):
     classname = m.__class__.__name__
     # print(classname)
     if isinstance(m, nn.Linear) or isinstance(m, nn.Conv2d):
         init.kaiming_normal_(m.weight)
+
 
 class LambdaLayer(nn.Module):
     def __init__(self, lambd):
@@ -59,7 +61,8 @@ class BasicBlock(nn.Module):
 
     def __init__(self, in_planes, planes, stride=1, option='B'):
         super(BasicBlock, self).__init__()
-        self.conv1 = nn.Conv2d(in_planes, planes, kernel_size=3, stride=stride, padding=1, bias=False)
+        self.conv1 = nn.Conv2d(in_planes, planes, kernel_size=3,
+                               stride=stride, padding=1, bias=False)
         self.bn1 = nn.BatchNorm2d(planes)
         self.conv2 = nn.Conv2d(planes, planes, kernel_size=3, stride=1, padding=1, bias=False)
         self.bn2 = nn.BatchNorm2d(planes)
@@ -75,7 +78,7 @@ class BasicBlock(nn.Module):
             elif option == 'B':
                 self.shortcut = nn.Sequential(co.OrderedDict([
                     ('shortcut', nn.Conv2d(in_planes, self.expansion * planes,
-                        kernel_size=1, stride=stride, bias=False)),
+                                           kernel_size=1, stride=stride, bias=False)),
                     ('bn', nn.BatchNorm2d(self.expansion * planes))
                 ]))
 
