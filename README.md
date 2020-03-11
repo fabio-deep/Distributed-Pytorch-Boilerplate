@@ -1,5 +1,5 @@
 
-# Boilerplate Pytorch code with Distributed Training support.
+# Boilerplate Pytorch code with Distributed Training.
 
 This is a Pytorch implementation with general code for running and logging distributed training experiments. 
 
