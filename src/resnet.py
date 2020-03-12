@@ -59,7 +59,7 @@ class LambdaLayer(nn.Module):
 class BasicBlock(nn.Module):
     expansion = 1
 
-    def __init__(self, in_planes, planes, stride=1, option='B'):
+    def __init__(self, in_planes, planes, stride=1, option='B', ReZero=True):
         super(BasicBlock, self).__init__()
         self.conv1 = nn.Conv2d(in_planes, planes, kernel_size=3,
                                stride=stride, padding=1, bias=False)
@@ -82,10 +82,18 @@ class BasicBlock(nn.Module):
                     ('bn', nn.BatchNorm2d(self.expansion * planes))
                 ]))
 
+        self.ReZero = ReZero
+        if self.ReZero:
+            self.alpha_i = nn.Parameter(torch.zeros(1.))
+
     def forward(self, x):
         out = F.relu(self.bn1(self.conv1(x)))
         out = self.bn2(self.conv2(out))
-        out += self.shortcut(x)
+
+        if self.ReZero:
+            out += self.alpha_i * self.shortcut(x)
+        else:
+            out += self.shortcut(x)
         out = F.relu(out)
         return out
 
