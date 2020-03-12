@@ -84,7 +84,7 @@ class BasicBlock(nn.Module):
 
         self.ReZero = ReZero
         if self.ReZero:
-            self.alpha_i = nn.Parameter(torch.zeros(1.))
+            self.alpha_i = nn.Parameter(torch.zeros(1))
 
     def forward(self, x):
         out = F.relu(self.bn1(self.conv1(x)))

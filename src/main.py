@@ -117,7 +117,7 @@ def main():
     args = experiment_config(args)
 
     # initialise the model
-    model = resnet.resnet20(args)
+    model = resnet.resnet110(args)
 
     # place model onto GPU(s)
     if args.distributed:
