@@ -91,12 +91,11 @@ class BasicBlock(nn.Module):
         out = self.bn2(self.conv2(out))
 
         if self.ReZero:
-            out += self.alpha_i * self.shortcut(x)
+            out = self.alpha_i * out + self.shortcut(x)
         else:
             out += self.shortcut(x)
         out = F.relu(out)
         return out
-
 
 class ResNet(nn.Module):
     def __init__(self, block, num_blocks, in_channels, num_classes):
