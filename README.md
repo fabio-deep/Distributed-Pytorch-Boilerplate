@@ -1,9 +1,13 @@
 
-# Boilerplate Pytorch code with Distributed Training.
+# Pytorch Distributed Training
 
-This is a Pytorch implementation with general code for running and logging distributed training experiments. 
+This is general pytorch code for running and logging distributed training experiments. 
 
-Simply drop in your own model into `src/main.py`.
+Using **DistributedDataParallel** is faster than **DataParallel**, even for single machine multi-gpu training.
+
+Runs are automatically organised into folders, with logs of the architecture and hyperparameters used, as well as the training progress print outs from the terminal (see example below).
+
+Simply drop your own model into `src/main.py`.
 
   * **Author**: Fabio De Sousa Ribeiro
   * **Email**: fdesosuaribeiro@lincoln.ac.uk
